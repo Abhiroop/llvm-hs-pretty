@@ -101,9 +101,6 @@ spacedbraces x = pretty '{' <+> x <+> pretty '}'
 local' :: Doc ann -> Doc ann
 local' a = "%" <> a
 
-local'' :: Type -> Doc ann -> Doc ann
-local'' ty a = "%" <> a <> (pretty ty)
-
 global :: Doc ann -> Doc ann
 global a = "@" <> a
 
@@ -612,7 +609,7 @@ instance Pretty (Either GroupID FunctionAttribute) where
   pretty (Right fattr) = pretty fattr
 
 instance Pretty Operand where
-  pretty (LocalReference ty nm) = local'' ty (pretty nm)
+  pretty (LocalReference _ nm) = local' (pretty nm)
   pretty (ConstantOperand con) = pretty con
   pretty (MetadataOperand mdata) = pretty mdata
 
