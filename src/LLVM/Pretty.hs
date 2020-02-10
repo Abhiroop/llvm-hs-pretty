@@ -1308,7 +1308,7 @@ ppCall Call { function = Right f,..}
     where
       (functionType@FunctionType {..}) = case (referencedType (typeOf f)) of
                                            fty@FunctionType {..} -> fty
-                                           _ -> error "Calling non function type. (Malformed AST)"
+                                           ty -> ty -- bypassing error for now
       ftype = if isVarArg
               then ppFunctionArgumentTypes functionType
               else mempty
